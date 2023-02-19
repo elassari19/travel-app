@@ -1,10 +1,12 @@
+import { db } from '../db';
 import express from 'express';
-import { ISignup } from './signup/_.type';
+import insertUser from './signup';
+import validator from './signup/_.validator';
+
+export const Users = db.collection('Users')
 
 const router = express.Router();
 
-
-router.post<ISignup, ISignup, ISignup>('/signup', (req, res) => {
-})
+router.use('/signup', validator(), insertUser)
 
 export default router;

@@ -10,7 +10,7 @@ const mochSignup = (params: ISignup) => {
 }
 
 describe('POST /api/v1/signup', () => {
-  it('sould return invalid data', async () => {
+  it('it should return invalid data', async () => {
     await mochSignup({
       email: 'elassari19',
       password: 'fds',
@@ -19,9 +19,9 @@ describe('POST /api/v1/signup', () => {
     .expect(422)
   })
 
-  it('sould return signup succeeded', async () => {
+  it('it should return signup succeeded', async () => {
     const response = await mochSignup({
-      email: 'elassari19',
+      email: 'elassari19@gamil.com',
       password: 'fdsfjklj4r',
       confirm: 'fdsfjklj4r'
     })
@@ -31,13 +31,13 @@ describe('POST /api/v1/signup', () => {
     expect(response.body).toHaveProperty('confirm')
   })
 
-  it('sould return already exist', async () => {
+  it('it should return already exist', async () => {
     await mochSignup({
-      email: 'elassari19',
+      email: 'elassari19@gamil.com',
       password: 'fdsfjklj4r',
       confirm: 'fdsfjklj4r'
     })
-    .expect(422)
+    .expect(302)
   })
 
 })
