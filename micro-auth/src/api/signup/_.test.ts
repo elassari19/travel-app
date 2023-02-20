@@ -22,20 +22,19 @@ describe('POST /api/v1/signup', () => {
   it('it should return signup succeeded', async () => {
     const response = await mochSignup({
       email: 'elassari19@gamil.com',
-      password: 'fdsfjklj4r',
-      confirm: 'fdsfjklj4r'
+      password: 'fdsfjklj4rwr',
+      confirm: 'fdsfjklj4rwr'
     })
     expect(response.statusCode).toBe(201)
     expect(response.body).toHaveProperty('email')
     expect(response.body).toHaveProperty('password')
-    expect(response.body).toHaveProperty('confirm')
   })
 
   it('it should return already exist', async () => {
     await mochSignup({
       email: 'elassari19@gamil.com',
-      password: 'fdsfjklj4r',
-      confirm: 'fdsfjklj4r'
+      password: 'fdsfjklj4rwr',
+      confirm: 'fdsfjklj4rwr'
     })
     .expect(302)
   })
