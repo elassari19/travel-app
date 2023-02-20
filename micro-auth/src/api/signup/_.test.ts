@@ -28,6 +28,9 @@ describe('POST /api/v1/signup', () => {
     expect(response.statusCode).toBe(201)
     expect(response.body).toHaveProperty('email')
     expect(response.body).toHaveProperty('password')
+    expect(response.body).toHaveProperty('verification')
+    expect(response.body).toHaveProperty('verified')
+    expect(response.body.verified).toBe(false)
   })
 
   it('it should return already exist', async () => {
