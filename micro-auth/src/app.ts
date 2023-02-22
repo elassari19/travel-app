@@ -5,9 +5,12 @@ import cors from 'cors';
 
 import * as middlewares from './middlewares';
 import api from './api'
+import { mongoDB } from './api/config';
 require('dotenv').config();
 
 const app = express();
+// connect database 'mongoDB'
+mongoDB();
 
 app.use(morgan('dev'));
 app.use(helmet());

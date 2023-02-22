@@ -10,7 +10,7 @@ const validator = (validators: any) => async (req: Request, res: Response, next:
     next()
   } catch (error) {
     // something happen
-    if (error instanceof ZodError) res.status(422)
+    if (error instanceof ZodError) res.status(422).send(error.message)
     next(error)
   }
 }

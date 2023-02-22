@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { WithId } from 'mongodb';
-import { ISignup } from 'api/signup/_.type';
-import { Users } from '../';
+import { ISignup } from './_.type';
+import { Users } from '../modules';
 import crypto from 'crypto'
 import { emailSender } from '../../utilities';
 
@@ -14,20 +14,20 @@ const insertUser = async (req: Request<ISignup>, res: Response, next: NextFuncti
     const result = await Users.findOne({ email: req.body.email })
 
     // the user/email already exist
-    if ( result?._id ) return res.status(302).send(req.body)
+    if ( result?._id ) return res.status(302).send(`this ${req.body.email} already exist`)
 
     // hashing password
     req.body = { 
       email: req.body.email,
       password: crypto.pbkdf2Sync(req.body.password, process.env.SALT!, 42, 64, `sha512`).toString(`hex`),
-      verification: crypto.randomBytes(64),
+      verification: crypto.randomBytes(64).toString('hex'),
       verified: false
     }
 
     // insert user/data in db
     if ( !result?._id ) {
       // @ts-ignore
-      Users.insertOne(req.body, { returnDocument: 'after' })
+      Users.create(req.body, {new: true})
         .then(async () => {
           await emailSender({
             to: 'hicham@omicmd.com',
