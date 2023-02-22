@@ -14,7 +14,7 @@ const insertUser = async (req: Request<ISignup>, res: Response, next: NextFuncti
     const result = await Users.findOne({ email: req.body.email })
 
     // the user/email already exist
-    if ( result?._id ) return res.status(302).send(`this ${req.body.email} already exist`)
+    if ( result?._id ) return res.status(302).send(`this user "${req.body.email}" already exist`)
 
     // hashing password
     req.body = { 
@@ -28,7 +28,7 @@ const insertUser = async (req: Request<ISignup>, res: Response, next: NextFuncti
     if ( !result?._id ) {
       // @ts-ignore
       Users.create(req.body, {new: true})
-        .then(async () => {
+        .then(async (result) => {
           await emailSender({
             to: 'hicham@omicmd.com',
             subject: 'verify your email',
@@ -40,7 +40,7 @@ const insertUser = async (req: Request<ISignup>, res: Response, next: NextFuncti
             <a href="http://${process.env.BASE_URL}/confirm?id=${req.body._id}&confirm=${req.body.verification}" >CLICK TO VIREFY EAMIL </a>
             </div>`
           })
-          return res.status(201).send(req.body)
+          return res.status(201).send(result)
         })
     }
 

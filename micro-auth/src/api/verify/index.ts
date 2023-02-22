@@ -26,13 +26,14 @@ const verifyUser = async (req: Request<IVerify>, res: Response, next: NextFuncti
     if (result?.verification != confirm) return res.status(422).send('verification failied please reques new validation code')
 
     // verfication succeeded
-    await Users.updateOne(
+    req.body = await Users.updateOne(
       { _id: id },
       {
         $set: { verified: true, verification: '', $currentDate: { lastUpdated: true } }, 
       }
     )
-    res.status(201).send('verification succeeded')
+    console.log('succeeded', req.body)
+    res.status(201).send(req.body)
   } catch (error) {
     console.log(error)
     next(error)
