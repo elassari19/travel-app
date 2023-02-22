@@ -4,13 +4,11 @@ import { IVerify } from './_.type'
 
 const mochVerify = (params: IVerify) => {
   return request(app)
-    .post(`${process.env.API_VERSION}/verify`)
-    .set('Accept', 'application-json')
-    .send(params)
+    .post(`${process.env.API_VERSION}/verify?id=${params.id}&confirm=${params.verification}`)
 }
 
 describe('POST /api/v1/verify', () => {
-  it('it should return invalid data', async () => {
+  it('it should return invalid url', async () => {
     await mochVerify({
       id: 'sj4hldsf87sdfj',
       verification: 'fds87sf89s7df6sdf567'
@@ -30,12 +28,12 @@ describe('POST /api/v1/verify', () => {
     expect(response.body.verified).toBe(true)
   })
 
-  it('it should return already exist', async () => {
+  it('it should return invalid url', async () => {
     await mochVerify({
       id: 'sj4hldsf87sdfj',
       verification: 'fds87sf89s7df6sdf567'
     })
-    .expect(404)
+    .expect(302)
   })
 
 })
