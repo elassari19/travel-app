@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { WithId } from 'mongodb';
 import { ISignup } from './_.type';
-import { Users } from '../modules';
+import { Users } from '../../modules';
 import crypto from 'crypto'
 import { emailSender } from '../../utilities';
 
