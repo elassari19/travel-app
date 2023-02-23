@@ -1,7 +1,7 @@
 import z from 'zod'
 
-export const ReSend = z.object({
+export const ReSendEamil = z.object({
   email: z.string().email().min(12)
 });
 
-export type IReSend = z.infer<typeof ReSend>
+export type IReSend = z.infer<typeof ReSendEamil>

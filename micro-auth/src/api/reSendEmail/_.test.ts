@@ -29,6 +29,8 @@ describe('POST /api/v1/sendemail', () => {
       email: 'hicham@omicmd.com'
     })
     expect(response.statusCode).toBe(200)
+    expect(response.body).toHaveProperty('verified')
+    expect(response.body.verified).toBe(false)
   })
 
   it('it should return send account already verified', async () => {
