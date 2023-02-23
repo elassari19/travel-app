@@ -5,7 +5,7 @@ import cors from 'cors';
 
 import * as middlewares from './middlewares';
 import api from './api'
-import { mongoDB } from './api/config';
+import { mongoDB } from './config';
 require('dotenv').config();
 
 const app = express();
