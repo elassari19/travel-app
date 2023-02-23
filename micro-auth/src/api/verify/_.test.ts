@@ -7,7 +7,7 @@ const mochVerify = (params: IVerify) => {
     .get(`${process.env.API_VERSION}/verify?id=${params.id}&confirm=${params.verification}`)
 }
 
-describe('POST /api/v1/verify', () => {
+describe('GET /api/v1/verify', () => {
   it('it should return invalid url', async () => {
     await mochVerify({
       id: '63f6a88b797eedd158e3141b',
