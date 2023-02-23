@@ -31,4 +31,11 @@ describe('POST /api/v1/sendemail', () => {
     expect(response.statusCode).toBe(200)
   })
 
+  it('it should return send account already verified', async () => {
+    const response = await mochReSendEmail({
+      email: 'elassari@omicmd.com'
+    })
+    expect(response.statusCode).toBe(302)
+  })
+
 })
