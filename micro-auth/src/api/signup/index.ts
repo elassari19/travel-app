@@ -3,7 +3,7 @@ import { WithId } from 'mongodb';
 import { ISignup } from './_.type';
 import { Users } from '../../modules';
 import crypto from 'crypto'
-import { emailSender } from '../../utilities';
+import { emailSender, hash } from '../../utilities';
 
 // solve problem of underscore (_) of id
 export type withid = WithId<ISignup> 
@@ -19,7 +19,7 @@ const insertUser = async (req: Request<ISignup>, res: Response, next: NextFuncti
     // hashing password
     req.body = { 
       email: req.body.email,
-      password: crypto.pbkdf2Sync(req.body.password, process.env.SALT!, 42, 64, `sha512`).toString(`hex`),
+      password: hash(req.body.password),
       verification: crypto.randomBytes(64).toString('hex'),
       verified: false
     }
