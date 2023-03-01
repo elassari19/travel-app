@@ -28,10 +28,10 @@ describe('GET /api/v1/signin', () => {
 
   it('it should return signin succeeded', async () => {
     const response = await mochSignIn({
-      email: 'hicham@omicmd.com',
+      email: 'elassari@omicmd.com',
       password: 'ddddd'
     })
-    expect(response.statusCode).toBe(201)
+    expect(response.statusCode).toBe(200)
     expect(response.body).toHaveProperty('modifiedCount')
     expect(response.body.modifiedCount).toBe(1)
   })
