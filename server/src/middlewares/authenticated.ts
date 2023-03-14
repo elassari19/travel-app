@@ -8,7 +8,6 @@ const authenticated = (state: Boolean) => async (req: Request, res: Response, ne
 
   // @ts-ignore
   const { user_id } = jwt.verify(token);
-  console.log(user_id)
 
   if (user_id) {
 

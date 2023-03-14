@@ -45,7 +45,7 @@ const signInUser = async (req: Request<ISignIn>, res: Response, next: NextFuncti
         })
       )
       .status(200)
-      .send(response);
+      .send(token);
     })
 
   } catch (error) {
